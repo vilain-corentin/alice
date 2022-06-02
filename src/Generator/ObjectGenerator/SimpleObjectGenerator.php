@@ -35,12 +35,12 @@ use Throwable;
 final class SimpleObjectGenerator implements ObjectGeneratorInterface
 {
     use IsAServiceTrait;
-    
+
     /**
      * @var InstantiatorInterface
      */
     private $instantiator;
-    
+
     /**
      * @var HydratorInterface
      */
@@ -77,7 +77,7 @@ final class SimpleObjectGenerator implements ObjectGeneratorInterface
         $this->hydrator = $hydrator;
         $this->caller = $caller;
     }
-    
+
     public function generate(
         FixtureInterface $fixture,
         ResolvedFixtureSet $fixtureSet,
@@ -99,10 +99,11 @@ final class SimpleObjectGenerator implements ObjectGeneratorInterface
 
         $arguments = [
             sprintf(
-                'An error occurred while generating the fixture "%s" (%s): %s',
+                'An error occurred while generating the fixture "%s" (%s): %s | Error: %s',
                 $fixture->getId(),
                 $fixture->getClassName(),
-                $throwable->getMessage()
+                $throwable->getMessage(),
+                $throwable->getPrevious()->getMessage()
             ),
             $throwable->getCode(),
             $throwable
