@@ -103,7 +103,7 @@ final class SimpleObjectGenerator implements ObjectGeneratorInterface
                 $fixture->getId(),
                 $fixture->getClassName(),
                 $throwable->getMessage(),
-                $throwable->getPrevious()->getMessage()
+                $throwable->getPrevious() !== null ? $throwable->getPrevious()->getMessage() : ""
             ),
             $throwable->getCode(),
             $throwable
